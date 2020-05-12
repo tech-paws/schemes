@@ -1,0 +1,46 @@
+include "data.fbs";
+
+namespace TechPaws.Schemes.Commands;
+
+enum RenderCommandType: byte {
+    PushColor = 0,
+    PushPos2f = 1,
+    PushSize2f = 2,
+    PushTexture = 3,
+    SetColorUniform = 4,
+    PushColorShader = 5,
+    PushTextureShader = 6,
+    DrawLines = 7,
+    DrawPoints = 8,
+    DrawQuads = 9,
+}
+
+enum ExecutionCommandType: byte {
+    PushPos2f = 0,
+    UpdateCameraPosition = 1,
+}
+
+enum RequestCommandType: byte {
+    SetViewportSize = 0,
+    OnTouchStart = 1,
+    OnTouchEnd = 2,
+    OnTouchMove = 3,
+}
+
+table RenderCommand {
+    type: RenderCommandType;
+    data: TechPaws.Schemes.Data.Variant;
+}
+
+table ExecutionCommand {
+    type: ExecutionCommandType;
+    data: TechPaws.Schemes.Data.Variant;
+}
+
+table RenderCommands {
+    commands: [RenderCommand];
+}
+
+table ExecutionCommands {
+    commands: [ExecutionCommand];
+}

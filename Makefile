@@ -1,5 +1,5 @@
 FLATC = flatc
-SOURCES := $(shell find src -type f -name '*.fbs')
+SOURCES = $(shell find src -type f -name '*.fbs')
 MSG_BUILD = Build:
 
 build: rust swift
