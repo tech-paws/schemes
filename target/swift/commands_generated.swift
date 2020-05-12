@@ -4,7 +4,6 @@ import FlatBuffers
 
 public enum TechPaws {
 public enum Schemes {
-public enum Commands {
 
 public enum RenderCommandType: Int8, Enum { 
 	public typealias T = Int8
@@ -52,6 +51,107 @@ public enum RequestCommandType: Int8, Enum {
 	public static var min: RequestCommandType { return .setviewportsize }
 }
 
+public struct Vec2f: Readable {
+
+	static func validateVersion() { FlatBuffersVersion_1_12_0() }
+	public var __buffer: ByteBuffer! { return _accessor.bb }
+
+	private var _accessor: Struct
+	public static var size = 8
+	public static var alignment = 4	
+	public init(_ bb: ByteBuffer, o: Int32) { _accessor = Struct(bb: bb, position: o) }
+
+	public var x: Float32 { return _accessor.readBuffer(of: Float32.self, at: 0) }
+	public var y: Float32 { return _accessor.readBuffer(of: Float32.self, at: 4) }
+}
+
+public struct Vec2i: Readable {
+
+	static func validateVersion() { FlatBuffersVersion_1_12_0() }
+	public var __buffer: ByteBuffer! { return _accessor.bb }
+
+	private var _accessor: Struct
+	public static var size = 8
+	public static var alignment = 4	
+	public init(_ bb: ByteBuffer, o: Int32) { _accessor = Struct(bb: bb, position: o) }
+
+	public var x: Int32 { return _accessor.readBuffer(of: Int32.self, at: 0) }
+	public var y: Int32 { return _accessor.readBuffer(of: Int32.self, at: 4) }
+}
+
+public struct Color: Readable {
+
+	static func validateVersion() { FlatBuffersVersion_1_12_0() }
+	public var __buffer: ByteBuffer! { return _accessor.bb }
+
+	private var _accessor: Struct
+	public static var size = 16
+	public static var alignment = 4	
+	public init(_ bb: ByteBuffer, o: Int32) { _accessor = Struct(bb: bb, position: o) }
+
+	public var r: Float32 { return _accessor.readBuffer(of: Float32.self, at: 0) }
+	public var g: Float32 { return _accessor.readBuffer(of: Float32.self, at: 4) }
+	public var b: Float32 { return _accessor.readBuffer(of: Float32.self, at: 8) }
+	public var a: Float32 { return _accessor.readBuffer(of: Float32.self, at: 12) }
+}
+
+public static func createVec2f(x: Float32, y: Float32) -> UnsafeMutableRawPointer {
+	let memory = UnsafeMutableRawPointer.allocate(byteCount: Vec2f.size, alignment: Vec2f.alignment)
+	memory.initializeMemory(as: UInt8.self, repeating: 0, count: Vec2f.size)
+	memory.storeBytes(of: x, toByteOffset: 0, as: Float32.self)
+	memory.storeBytes(of: y, toByteOffset: 4, as: Float32.self)
+	return memory
+}
+
+public static func createVec2i(x: Int32, y: Int32) -> UnsafeMutableRawPointer {
+	let memory = UnsafeMutableRawPointer.allocate(byteCount: Vec2i.size, alignment: Vec2i.alignment)
+	memory.initializeMemory(as: UInt8.self, repeating: 0, count: Vec2i.size)
+	memory.storeBytes(of: x, toByteOffset: 0, as: Int32.self)
+	memory.storeBytes(of: y, toByteOffset: 4, as: Int32.self)
+	return memory
+}
+
+public static func createColor(r: Float32, g: Float32, b: Float32, a: Float32) -> UnsafeMutableRawPointer {
+	let memory = UnsafeMutableRawPointer.allocate(byteCount: Color.size, alignment: Color.alignment)
+	memory.initializeMemory(as: UInt8.self, repeating: 0, count: Color.size)
+	memory.storeBytes(of: r, toByteOffset: 0, as: Float32.self)
+	memory.storeBytes(of: g, toByteOffset: 4, as: Float32.self)
+	memory.storeBytes(of: b, toByteOffset: 8, as: Float32.self)
+	memory.storeBytes(of: a, toByteOffset: 12, as: Float32.self)
+	return memory
+}
+
+public struct Data: FlatBufferObject {
+
+	static func validateVersion() { FlatBuffersVersion_1_12_0() }
+	public var __buffer: ByteBuffer! { return _accessor.bb }
+
+	private var _accessor: Table
+	public static func getRootAsData(bb: ByteBuffer) -> Data { return Data(Table(bb: bb, position: Int32(bb.read(def: UOffset.self, position: bb.reader)) + Int32(bb.reader))) }
+
+	private init(_ t: Table) { _accessor = t }
+	public init(_ bb: ByteBuffer, o: Int32) { _accessor = Table(bb: bb, position: o) }
+
+	public var color: TechPaws.Schemes.Color? { let o = _accessor.offset(4); return o == 0 ? nil : TechPaws.Schemes.Color(_accessor.bb, o: o + _accessor.postion) }
+	public var vec2f: TechPaws.Schemes.Vec2f? { let o = _accessor.offset(6); return o == 0 ? nil : TechPaws.Schemes.Vec2f(_accessor.bb, o: o + _accessor.postion) }
+	public var vec2i: TechPaws.Schemes.Vec2i? { let o = _accessor.offset(8); return o == 0 ? nil : TechPaws.Schemes.Vec2i(_accessor.bb, o: o + _accessor.postion) }
+	public static func startData(_ fbb: FlatBufferBuilder) -> UOffset { fbb.startTable(with: 3) }
+	public static func add(color: Offset<UOffset>, _ fbb: FlatBufferBuilder) { fbb.add(structOffset: 0) }
+	public static func add(vec2f: Offset<UOffset>, _ fbb: FlatBufferBuilder) { fbb.add(structOffset: 1) }
+	public static func add(vec2i: Offset<UOffset>, _ fbb: FlatBufferBuilder) { fbb.add(structOffset: 2) }
+	public static func endData(_ fbb: FlatBufferBuilder, start: UOffset) -> Offset<UOffset> { let end = Offset<UOffset>(offset: fbb.endTable(at: start)); return end }
+	public static func createData(_ fbb: FlatBufferBuilder,
+		offsetOfColor color: Offset<UOffset> = Offset(),
+		offsetOfVec2f vec2f: Offset<UOffset> = Offset(),
+		offsetOfVec2i vec2i: Offset<UOffset> = Offset()) -> Offset<UOffset> {
+		let __start = Data.startData(fbb)
+		Data.add(color: color, fbb)
+		Data.add(vec2f: vec2f, fbb)
+		Data.add(vec2i: vec2i, fbb)
+		return Data.endData(fbb, start: __start)
+	}
+}
+
 public struct RenderCommand: FlatBufferObject {
 
 	static func validateVersion() { FlatBuffersVersion_1_12_0() }
@@ -63,14 +163,14 @@ public struct RenderCommand: FlatBufferObject {
 	private init(_ t: Table) { _accessor = t }
 	public init(_ bb: ByteBuffer, o: Int32) { _accessor = Table(bb: bb, position: o) }
 
-	public var type: TechPaws.Schemes.Commands.RenderCommandType { let o = _accessor.offset(4); return o == 0 ? .pushcolor : TechPaws.Schemes.Commands.RenderCommandType(rawValue: _accessor.readBuffer(of: Int8.self, at: o)) ?? .pushcolor }
-	public var data: TechPaws.Schemes.Data.Variant? { let o = _accessor.offset(6); return o == 0 ? nil : TechPaws.Schemes.Data.Variant(_accessor.bb, o: _accessor.indirect(o + _accessor.postion)) }
+	public var type: TechPaws.Schemes.RenderCommandType { let o = _accessor.offset(4); return o == 0 ? .pushcolor : TechPaws.Schemes.RenderCommandType(rawValue: _accessor.readBuffer(of: Int8.self, at: o)) ?? .pushcolor }
+	public var data: TechPaws.Schemes.Data? { let o = _accessor.offset(6); return o == 0 ? nil : TechPaws.Schemes.Data(_accessor.bb, o: _accessor.indirect(o + _accessor.postion)) }
 	public static func startRenderCommand(_ fbb: FlatBufferBuilder) -> UOffset { fbb.startTable(with: 2) }
-	public static func add(type: TechPaws.Schemes.Commands.RenderCommandType, _ fbb: FlatBufferBuilder) { fbb.add(element: type.rawValue, def: 0, at: 0) }
+	public static func add(type: TechPaws.Schemes.RenderCommandType, _ fbb: FlatBufferBuilder) { fbb.add(element: type.rawValue, def: 0, at: 0) }
 	public static func add(data: Offset<UOffset>, _ fbb: FlatBufferBuilder) { fbb.add(offset: data, at: 1)  }
 	public static func endRenderCommand(_ fbb: FlatBufferBuilder, start: UOffset) -> Offset<UOffset> { let end = Offset<UOffset>(offset: fbb.endTable(at: start)); return end }
 	public static func createRenderCommand(_ fbb: FlatBufferBuilder,
-		type: TechPaws.Schemes.Commands.RenderCommandType = .pushcolor,
+		type: TechPaws.Schemes.RenderCommandType = .pushcolor,
 		offsetOfData data: Offset<UOffset> = Offset()) -> Offset<UOffset> {
 		let __start = RenderCommand.startRenderCommand(fbb)
 		RenderCommand.add(type: type, fbb)
@@ -90,19 +190,46 @@ public struct ExecutionCommand: FlatBufferObject {
 	private init(_ t: Table) { _accessor = t }
 	public init(_ bb: ByteBuffer, o: Int32) { _accessor = Table(bb: bb, position: o) }
 
-	public var type: TechPaws.Schemes.Commands.ExecutionCommandType { let o = _accessor.offset(4); return o == 0 ? .pushpos2f : TechPaws.Schemes.Commands.ExecutionCommandType(rawValue: _accessor.readBuffer(of: Int8.self, at: o)) ?? .pushpos2f }
-	public var data: TechPaws.Schemes.Data.Variant? { let o = _accessor.offset(6); return o == 0 ? nil : TechPaws.Schemes.Data.Variant(_accessor.bb, o: _accessor.indirect(o + _accessor.postion)) }
+	public var type: TechPaws.Schemes.ExecutionCommandType { let o = _accessor.offset(4); return o == 0 ? .pushpos2f : TechPaws.Schemes.ExecutionCommandType(rawValue: _accessor.readBuffer(of: Int8.self, at: o)) ?? .pushpos2f }
+	public var data: TechPaws.Schemes.Data? { let o = _accessor.offset(6); return o == 0 ? nil : TechPaws.Schemes.Data(_accessor.bb, o: _accessor.indirect(o + _accessor.postion)) }
 	public static func startExecutionCommand(_ fbb: FlatBufferBuilder) -> UOffset { fbb.startTable(with: 2) }
-	public static func add(type: TechPaws.Schemes.Commands.ExecutionCommandType, _ fbb: FlatBufferBuilder) { fbb.add(element: type.rawValue, def: 0, at: 0) }
+	public static func add(type: TechPaws.Schemes.ExecutionCommandType, _ fbb: FlatBufferBuilder) { fbb.add(element: type.rawValue, def: 0, at: 0) }
 	public static func add(data: Offset<UOffset>, _ fbb: FlatBufferBuilder) { fbb.add(offset: data, at: 1)  }
 	public static func endExecutionCommand(_ fbb: FlatBufferBuilder, start: UOffset) -> Offset<UOffset> { let end = Offset<UOffset>(offset: fbb.endTable(at: start)); return end }
 	public static func createExecutionCommand(_ fbb: FlatBufferBuilder,
-		type: TechPaws.Schemes.Commands.ExecutionCommandType = .pushpos2f,
+		type: TechPaws.Schemes.ExecutionCommandType = .pushpos2f,
 		offsetOfData data: Offset<UOffset> = Offset()) -> Offset<UOffset> {
 		let __start = ExecutionCommand.startExecutionCommand(fbb)
 		ExecutionCommand.add(type: type, fbb)
 		ExecutionCommand.add(data: data, fbb)
 		return ExecutionCommand.endExecutionCommand(fbb, start: __start)
+	}
+}
+
+public struct RequestCommand: FlatBufferObject {
+
+	static func validateVersion() { FlatBuffersVersion_1_12_0() }
+	public var __buffer: ByteBuffer! { return _accessor.bb }
+
+	private var _accessor: Table
+	public static func getRootAsRequestCommand(bb: ByteBuffer) -> RequestCommand { return RequestCommand(Table(bb: bb, position: Int32(bb.read(def: UOffset.self, position: bb.reader)) + Int32(bb.reader))) }
+
+	private init(_ t: Table) { _accessor = t }
+	public init(_ bb: ByteBuffer, o: Int32) { _accessor = Table(bb: bb, position: o) }
+
+	public var type: TechPaws.Schemes.RequestCommandType { let o = _accessor.offset(4); return o == 0 ? .setviewportsize : TechPaws.Schemes.RequestCommandType(rawValue: _accessor.readBuffer(of: Int8.self, at: o)) ?? .setviewportsize }
+	public var data: TechPaws.Schemes.Data? { let o = _accessor.offset(6); return o == 0 ? nil : TechPaws.Schemes.Data(_accessor.bb, o: _accessor.indirect(o + _accessor.postion)) }
+	public static func startRequestCommand(_ fbb: FlatBufferBuilder) -> UOffset { fbb.startTable(with: 2) }
+	public static func add(type: TechPaws.Schemes.RequestCommandType, _ fbb: FlatBufferBuilder) { fbb.add(element: type.rawValue, def: 0, at: 0) }
+	public static func add(data: Offset<UOffset>, _ fbb: FlatBufferBuilder) { fbb.add(offset: data, at: 1)  }
+	public static func endRequestCommand(_ fbb: FlatBufferBuilder, start: UOffset) -> Offset<UOffset> { let end = Offset<UOffset>(offset: fbb.endTable(at: start)); return end }
+	public static func createRequestCommand(_ fbb: FlatBufferBuilder,
+		type: TechPaws.Schemes.RequestCommandType = .setviewportsize,
+		offsetOfData data: Offset<UOffset> = Offset()) -> Offset<UOffset> {
+		let __start = RequestCommand.startRequestCommand(fbb)
+		RequestCommand.add(type: type, fbb)
+		RequestCommand.add(data: data, fbb)
+		return RequestCommand.endRequestCommand(fbb, start: __start)
 	}
 }
 
@@ -118,7 +245,7 @@ public struct RenderCommands: FlatBufferObject {
 	public init(_ bb: ByteBuffer, o: Int32) { _accessor = Table(bb: bb, position: o) }
 
 	public var commandsCount: Int32 { let o = _accessor.offset(4); return o == 0 ? 0 : _accessor.vector(count: o) }
-	public func commands(at index: Int32) -> TechPaws.Schemes.Commands.RenderCommand? { let o = _accessor.offset(4); return o == 0 ? nil : TechPaws.Schemes.Commands.RenderCommand(_accessor.bb, o: _accessor.indirect(_accessor.vector(at: o) + index * 4)) }
+	public func commands(at index: Int32) -> TechPaws.Schemes.RenderCommand? { let o = _accessor.offset(4); return o == 0 ? nil : TechPaws.Schemes.RenderCommand(_accessor.bb, o: _accessor.indirect(_accessor.vector(at: o) + index * 4)) }
 	public static func startRenderCommands(_ fbb: FlatBufferBuilder) -> UOffset { fbb.startTable(with: 1) }
 	public static func addVectorOf(commands: Offset<UOffset>, _ fbb: FlatBufferBuilder) { fbb.add(offset: commands, at: 0)  }
 	public static func endRenderCommands(_ fbb: FlatBufferBuilder, start: UOffset) -> Offset<UOffset> { let end = Offset<UOffset>(offset: fbb.endTable(at: start)); return end }
@@ -142,7 +269,7 @@ public struct ExecutionCommands: FlatBufferObject {
 	public init(_ bb: ByteBuffer, o: Int32) { _accessor = Table(bb: bb, position: o) }
 
 	public var commandsCount: Int32 { let o = _accessor.offset(4); return o == 0 ? 0 : _accessor.vector(count: o) }
-	public func commands(at index: Int32) -> TechPaws.Schemes.Commands.ExecutionCommand? { let o = _accessor.offset(4); return o == 0 ? nil : TechPaws.Schemes.Commands.ExecutionCommand(_accessor.bb, o: _accessor.indirect(_accessor.vector(at: o) + index * 4)) }
+	public func commands(at index: Int32) -> TechPaws.Schemes.ExecutionCommand? { let o = _accessor.offset(4); return o == 0 ? nil : TechPaws.Schemes.ExecutionCommand(_accessor.bb, o: _accessor.indirect(_accessor.vector(at: o) + index * 4)) }
 	public static func startExecutionCommands(_ fbb: FlatBufferBuilder) -> UOffset { fbb.startTable(with: 1) }
 	public static func addVectorOf(commands: Offset<UOffset>, _ fbb: FlatBufferBuilder) { fbb.add(offset: commands, at: 0)  }
 	public static func endExecutionCommands(_ fbb: FlatBufferBuilder, start: UOffset) -> Offset<UOffset> { let end = Offset<UOffset>(offset: fbb.endTable(at: start)); return end }
@@ -154,9 +281,29 @@ public struct ExecutionCommands: FlatBufferObject {
 	}
 }
 
-}
+public struct RequestCommands: FlatBufferObject {
 
-// MARK: - Commands
+	static func validateVersion() { FlatBuffersVersion_1_12_0() }
+	public var __buffer: ByteBuffer! { return _accessor.bb }
+
+	private var _accessor: Table
+	public static func getRootAsRequestCommands(bb: ByteBuffer) -> RequestCommands { return RequestCommands(Table(bb: bb, position: Int32(bb.read(def: UOffset.self, position: bb.reader)) + Int32(bb.reader))) }
+
+	private init(_ t: Table) { _accessor = t }
+	public init(_ bb: ByteBuffer, o: Int32) { _accessor = Table(bb: bb, position: o) }
+
+	public var commandsCount: Int32 { let o = _accessor.offset(4); return o == 0 ? 0 : _accessor.vector(count: o) }
+	public func commands(at index: Int32) -> TechPaws.Schemes.RequestCommand? { let o = _accessor.offset(4); return o == 0 ? nil : TechPaws.Schemes.RequestCommand(_accessor.bb, o: _accessor.indirect(_accessor.vector(at: o) + index * 4)) }
+	public static func startRequestCommands(_ fbb: FlatBufferBuilder) -> UOffset { fbb.startTable(with: 1) }
+	public static func addVectorOf(commands: Offset<UOffset>, _ fbb: FlatBufferBuilder) { fbb.add(offset: commands, at: 0)  }
+	public static func endRequestCommands(_ fbb: FlatBufferBuilder, start: UOffset) -> Offset<UOffset> { let end = Offset<UOffset>(offset: fbb.endTable(at: start)); return end }
+	public static func createRequestCommands(_ fbb: FlatBufferBuilder,
+		vectorOfCommands commands: Offset<UOffset> = Offset()) -> Offset<UOffset> {
+		let __start = RequestCommands.startRequestCommands(fbb)
+		RequestCommands.addVectorOf(commands: commands, fbb)
+		return RequestCommands.endRequestCommands(fbb, start: __start)
+	}
+}
 
 }
 

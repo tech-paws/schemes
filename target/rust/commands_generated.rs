@@ -2,7 +2,6 @@
 
 
 
-use crate::data_generated::*;
 use std::mem;
 use std::cmp::Ordering;
 
@@ -12,7 +11,6 @@ use self::flatbuffers::EndianScalar;
 #[allow(unused_imports, dead_code)]
 pub mod tech_paws {
 
-  use crate::data_generated::*;
   use std::mem;
   use std::cmp::Ordering;
 
@@ -21,16 +19,6 @@ pub mod tech_paws {
 #[allow(unused_imports, dead_code)]
 pub mod schemes {
 
-  use crate::data_generated::*;
-  use std::mem;
-  use std::cmp::Ordering;
-
-  extern crate flatbuffers;
-  use self::flatbuffers::EndianScalar;
-#[allow(unused_imports, dead_code)]
-pub mod commands {
-
-  use crate::data_generated::*;
   use std::mem;
   use std::cmp::Ordering;
 
@@ -247,6 +235,299 @@ pub fn enum_name_request_command_type(e: RequestCommandType) -> &'static str {
   ENUM_NAMES_REQUEST_COMMAND_TYPE[index as usize]
 }
 
+// struct Vec2f, aligned to 4
+#[repr(C, align(4))]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct Vec2f {
+  x_: f32,
+  y_: f32,
+} // pub struct Vec2f
+impl flatbuffers::SafeSliceAccess for Vec2f {}
+impl<'a> flatbuffers::Follow<'a> for Vec2f {
+  type Inner = &'a Vec2f;
+  #[inline]
+  fn follow(buf: &'a [u8], loc: usize) -> Self::Inner {
+    <&'a Vec2f>::follow(buf, loc)
+  }
+}
+impl<'a> flatbuffers::Follow<'a> for &'a Vec2f {
+  type Inner = &'a Vec2f;
+  #[inline]
+  fn follow(buf: &'a [u8], loc: usize) -> Self::Inner {
+    flatbuffers::follow_cast_ref::<Vec2f>(buf, loc)
+  }
+}
+impl<'b> flatbuffers::Push for Vec2f {
+    type Output = Vec2f;
+    #[inline]
+    fn push(&self, dst: &mut [u8], _rest: &[u8]) {
+        let src = unsafe {
+            ::std::slice::from_raw_parts(self as *const Vec2f as *const u8, Self::size())
+        };
+        dst.copy_from_slice(src);
+    }
+}
+impl<'b> flatbuffers::Push for &'b Vec2f {
+    type Output = Vec2f;
+
+    #[inline]
+    fn push(&self, dst: &mut [u8], _rest: &[u8]) {
+        let src = unsafe {
+            ::std::slice::from_raw_parts(*self as *const Vec2f as *const u8, Self::size())
+        };
+        dst.copy_from_slice(src);
+    }
+}
+
+
+impl Vec2f {
+  pub fn new<'a>(_x: f32, _y: f32) -> Self {
+    Vec2f {
+      x_: _x.to_little_endian(),
+      y_: _y.to_little_endian(),
+
+    }
+  }
+  pub fn x<'a>(&'a self) -> f32 {
+    self.x_.from_little_endian()
+  }
+  pub fn y<'a>(&'a self) -> f32 {
+    self.y_.from_little_endian()
+  }
+}
+
+// struct Vec2i, aligned to 4
+#[repr(C, align(4))]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct Vec2i {
+  x_: i32,
+  y_: i32,
+} // pub struct Vec2i
+impl flatbuffers::SafeSliceAccess for Vec2i {}
+impl<'a> flatbuffers::Follow<'a> for Vec2i {
+  type Inner = &'a Vec2i;
+  #[inline]
+  fn follow(buf: &'a [u8], loc: usize) -> Self::Inner {
+    <&'a Vec2i>::follow(buf, loc)
+  }
+}
+impl<'a> flatbuffers::Follow<'a> for &'a Vec2i {
+  type Inner = &'a Vec2i;
+  #[inline]
+  fn follow(buf: &'a [u8], loc: usize) -> Self::Inner {
+    flatbuffers::follow_cast_ref::<Vec2i>(buf, loc)
+  }
+}
+impl<'b> flatbuffers::Push for Vec2i {
+    type Output = Vec2i;
+    #[inline]
+    fn push(&self, dst: &mut [u8], _rest: &[u8]) {
+        let src = unsafe {
+            ::std::slice::from_raw_parts(self as *const Vec2i as *const u8, Self::size())
+        };
+        dst.copy_from_slice(src);
+    }
+}
+impl<'b> flatbuffers::Push for &'b Vec2i {
+    type Output = Vec2i;
+
+    #[inline]
+    fn push(&self, dst: &mut [u8], _rest: &[u8]) {
+        let src = unsafe {
+            ::std::slice::from_raw_parts(*self as *const Vec2i as *const u8, Self::size())
+        };
+        dst.copy_from_slice(src);
+    }
+}
+
+
+impl Vec2i {
+  pub fn new<'a>(_x: i32, _y: i32) -> Self {
+    Vec2i {
+      x_: _x.to_little_endian(),
+      y_: _y.to_little_endian(),
+
+    }
+  }
+  pub fn x<'a>(&'a self) -> i32 {
+    self.x_.from_little_endian()
+  }
+  pub fn y<'a>(&'a self) -> i32 {
+    self.y_.from_little_endian()
+  }
+}
+
+// struct Color, aligned to 4
+#[repr(C, align(4))]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct Color {
+  r_: f32,
+  g_: f32,
+  b_: f32,
+  a_: f32,
+} // pub struct Color
+impl flatbuffers::SafeSliceAccess for Color {}
+impl<'a> flatbuffers::Follow<'a> for Color {
+  type Inner = &'a Color;
+  #[inline]
+  fn follow(buf: &'a [u8], loc: usize) -> Self::Inner {
+    <&'a Color>::follow(buf, loc)
+  }
+}
+impl<'a> flatbuffers::Follow<'a> for &'a Color {
+  type Inner = &'a Color;
+  #[inline]
+  fn follow(buf: &'a [u8], loc: usize) -> Self::Inner {
+    flatbuffers::follow_cast_ref::<Color>(buf, loc)
+  }
+}
+impl<'b> flatbuffers::Push for Color {
+    type Output = Color;
+    #[inline]
+    fn push(&self, dst: &mut [u8], _rest: &[u8]) {
+        let src = unsafe {
+            ::std::slice::from_raw_parts(self as *const Color as *const u8, Self::size())
+        };
+        dst.copy_from_slice(src);
+    }
+}
+impl<'b> flatbuffers::Push for &'b Color {
+    type Output = Color;
+
+    #[inline]
+    fn push(&self, dst: &mut [u8], _rest: &[u8]) {
+        let src = unsafe {
+            ::std::slice::from_raw_parts(*self as *const Color as *const u8, Self::size())
+        };
+        dst.copy_from_slice(src);
+    }
+}
+
+
+impl Color {
+  pub fn new<'a>(_r: f32, _g: f32, _b: f32, _a: f32) -> Self {
+    Color {
+      r_: _r.to_little_endian(),
+      g_: _g.to_little_endian(),
+      b_: _b.to_little_endian(),
+      a_: _a.to_little_endian(),
+
+    }
+  }
+  pub fn r<'a>(&'a self) -> f32 {
+    self.r_.from_little_endian()
+  }
+  pub fn g<'a>(&'a self) -> f32 {
+    self.g_.from_little_endian()
+  }
+  pub fn b<'a>(&'a self) -> f32 {
+    self.b_.from_little_endian()
+  }
+  pub fn a<'a>(&'a self) -> f32 {
+    self.a_.from_little_endian()
+  }
+}
+
+pub enum DataOffset {}
+#[derive(Copy, Clone, Debug, PartialEq)]
+
+pub struct Data<'a> {
+  pub _tab: flatbuffers::Table<'a>,
+}
+
+impl<'a> flatbuffers::Follow<'a> for Data<'a> {
+    type Inner = Data<'a>;
+    #[inline]
+    fn follow(buf: &'a [u8], loc: usize) -> Self::Inner {
+        Self {
+            _tab: flatbuffers::Table { buf: buf, loc: loc },
+        }
+    }
+}
+
+impl<'a> Data<'a> {
+    #[inline]
+    pub fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
+        Data {
+            _tab: table,
+        }
+    }
+    #[allow(unused_mut)]
+    pub fn create<'bldr: 'args, 'args: 'mut_bldr, 'mut_bldr>(
+        _fbb: &'mut_bldr mut flatbuffers::FlatBufferBuilder<'bldr>,
+        args: &'args DataArgs<'args>) -> flatbuffers::WIPOffset<Data<'bldr>> {
+      let mut builder = DataBuilder::new(_fbb);
+      if let Some(x) = args.vec2i { builder.add_vec2i(x); }
+      if let Some(x) = args.vec2f { builder.add_vec2f(x); }
+      if let Some(x) = args.color { builder.add_color(x); }
+      builder.finish()
+    }
+
+    pub const VT_COLOR: flatbuffers::VOffsetT = 4;
+    pub const VT_VEC2F: flatbuffers::VOffsetT = 6;
+    pub const VT_VEC2I: flatbuffers::VOffsetT = 8;
+
+  #[inline]
+  pub fn color(&self) -> Option<&'a Color> {
+    self._tab.get::<Color>(Data::VT_COLOR, None)
+  }
+  #[inline]
+  pub fn vec2f(&self) -> Option<&'a Vec2f> {
+    self._tab.get::<Vec2f>(Data::VT_VEC2F, None)
+  }
+  #[inline]
+  pub fn vec2i(&self) -> Option<&'a Vec2i> {
+    self._tab.get::<Vec2i>(Data::VT_VEC2I, None)
+  }
+}
+
+pub struct DataArgs<'a> {
+    pub color: Option<&'a  Color>,
+    pub vec2f: Option<&'a  Vec2f>,
+    pub vec2i: Option<&'a  Vec2i>,
+}
+impl<'a> Default for DataArgs<'a> {
+    #[inline]
+    fn default() -> Self {
+        DataArgs {
+            color: None,
+            vec2f: None,
+            vec2i: None,
+        }
+    }
+}
+pub struct DataBuilder<'a: 'b, 'b> {
+  fbb_: &'b mut flatbuffers::FlatBufferBuilder<'a>,
+  start_: flatbuffers::WIPOffset<flatbuffers::TableUnfinishedWIPOffset>,
+}
+impl<'a: 'b, 'b> DataBuilder<'a, 'b> {
+  #[inline]
+  pub fn add_color(&mut self, color: &'b  Color) {
+    self.fbb_.push_slot_always::<&Color>(Data::VT_COLOR, color);
+  }
+  #[inline]
+  pub fn add_vec2f(&mut self, vec2f: &'b  Vec2f) {
+    self.fbb_.push_slot_always::<&Vec2f>(Data::VT_VEC2F, vec2f);
+  }
+  #[inline]
+  pub fn add_vec2i(&mut self, vec2i: &'b  Vec2i) {
+    self.fbb_.push_slot_always::<&Vec2i>(Data::VT_VEC2I, vec2i);
+  }
+  #[inline]
+  pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a>) -> DataBuilder<'a, 'b> {
+    let start = _fbb.start_table();
+    DataBuilder {
+      fbb_: _fbb,
+      start_: start,
+    }
+  }
+  #[inline]
+  pub fn finish(self) -> flatbuffers::WIPOffset<Data<'a>> {
+    let o = self.fbb_.end_table(self.start_);
+    flatbuffers::WIPOffset::new(o.value())
+  }
+}
+
 pub enum RenderCommandOffset {}
 #[derive(Copy, Clone, Debug, PartialEq)]
 
@@ -289,14 +570,14 @@ impl<'a> RenderCommand<'a> {
     self._tab.get::<RenderCommandType>(RenderCommand::VT_TYPE_, Some(RenderCommandType::PushColor)).unwrap()
   }
   #[inline]
-  pub fn data(&self) -> Option<super::data::Variant<'a>> {
-    self._tab.get::<flatbuffers::ForwardsUOffset<super::data::Variant<'a>>>(RenderCommand::VT_DATA, None)
+  pub fn data(&self) -> Option<Data<'a>> {
+    self._tab.get::<flatbuffers::ForwardsUOffset<Data<'a>>>(RenderCommand::VT_DATA, None)
   }
 }
 
 pub struct RenderCommandArgs<'a> {
     pub type_: RenderCommandType,
-    pub data: Option<flatbuffers::WIPOffset<super::data::Variant<'a >>>,
+    pub data: Option<flatbuffers::WIPOffset<Data<'a >>>,
 }
 impl<'a> Default for RenderCommandArgs<'a> {
     #[inline]
@@ -317,8 +598,8 @@ impl<'a: 'b, 'b> RenderCommandBuilder<'a, 'b> {
     self.fbb_.push_slot::<RenderCommandType>(RenderCommand::VT_TYPE_, type_, RenderCommandType::PushColor);
   }
   #[inline]
-  pub fn add_data(&mut self, data: flatbuffers::WIPOffset<super::data::Variant<'b >>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<super::data::Variant>>(RenderCommand::VT_DATA, data);
+  pub fn add_data(&mut self, data: flatbuffers::WIPOffset<Data<'b >>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<Data>>(RenderCommand::VT_DATA, data);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a>) -> RenderCommandBuilder<'a, 'b> {
@@ -377,14 +658,14 @@ impl<'a> ExecutionCommand<'a> {
     self._tab.get::<ExecutionCommandType>(ExecutionCommand::VT_TYPE_, Some(ExecutionCommandType::PushPos2f)).unwrap()
   }
   #[inline]
-  pub fn data(&self) -> Option<super::data::Variant<'a>> {
-    self._tab.get::<flatbuffers::ForwardsUOffset<super::data::Variant<'a>>>(ExecutionCommand::VT_DATA, None)
+  pub fn data(&self) -> Option<Data<'a>> {
+    self._tab.get::<flatbuffers::ForwardsUOffset<Data<'a>>>(ExecutionCommand::VT_DATA, None)
   }
 }
 
 pub struct ExecutionCommandArgs<'a> {
     pub type_: ExecutionCommandType,
-    pub data: Option<flatbuffers::WIPOffset<super::data::Variant<'a >>>,
+    pub data: Option<flatbuffers::WIPOffset<Data<'a >>>,
 }
 impl<'a> Default for ExecutionCommandArgs<'a> {
     #[inline]
@@ -405,8 +686,8 @@ impl<'a: 'b, 'b> ExecutionCommandBuilder<'a, 'b> {
     self.fbb_.push_slot::<ExecutionCommandType>(ExecutionCommand::VT_TYPE_, type_, ExecutionCommandType::PushPos2f);
   }
   #[inline]
-  pub fn add_data(&mut self, data: flatbuffers::WIPOffset<super::data::Variant<'b >>) {
-    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<super::data::Variant>>(ExecutionCommand::VT_DATA, data);
+  pub fn add_data(&mut self, data: flatbuffers::WIPOffset<Data<'b >>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<Data>>(ExecutionCommand::VT_DATA, data);
   }
   #[inline]
   pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a>) -> ExecutionCommandBuilder<'a, 'b> {
@@ -418,6 +699,94 @@ impl<'a: 'b, 'b> ExecutionCommandBuilder<'a, 'b> {
   }
   #[inline]
   pub fn finish(self) -> flatbuffers::WIPOffset<ExecutionCommand<'a>> {
+    let o = self.fbb_.end_table(self.start_);
+    flatbuffers::WIPOffset::new(o.value())
+  }
+}
+
+pub enum RequestCommandOffset {}
+#[derive(Copy, Clone, Debug, PartialEq)]
+
+pub struct RequestCommand<'a> {
+  pub _tab: flatbuffers::Table<'a>,
+}
+
+impl<'a> flatbuffers::Follow<'a> for RequestCommand<'a> {
+    type Inner = RequestCommand<'a>;
+    #[inline]
+    fn follow(buf: &'a [u8], loc: usize) -> Self::Inner {
+        Self {
+            _tab: flatbuffers::Table { buf: buf, loc: loc },
+        }
+    }
+}
+
+impl<'a> RequestCommand<'a> {
+    #[inline]
+    pub fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
+        RequestCommand {
+            _tab: table,
+        }
+    }
+    #[allow(unused_mut)]
+    pub fn create<'bldr: 'args, 'args: 'mut_bldr, 'mut_bldr>(
+        _fbb: &'mut_bldr mut flatbuffers::FlatBufferBuilder<'bldr>,
+        args: &'args RequestCommandArgs<'args>) -> flatbuffers::WIPOffset<RequestCommand<'bldr>> {
+      let mut builder = RequestCommandBuilder::new(_fbb);
+      if let Some(x) = args.data { builder.add_data(x); }
+      builder.add_type_(args.type_);
+      builder.finish()
+    }
+
+    pub const VT_TYPE_: flatbuffers::VOffsetT = 4;
+    pub const VT_DATA: flatbuffers::VOffsetT = 6;
+
+  #[inline]
+  pub fn type_(&self) -> RequestCommandType {
+    self._tab.get::<RequestCommandType>(RequestCommand::VT_TYPE_, Some(RequestCommandType::SetViewportSize)).unwrap()
+  }
+  #[inline]
+  pub fn data(&self) -> Option<Data<'a>> {
+    self._tab.get::<flatbuffers::ForwardsUOffset<Data<'a>>>(RequestCommand::VT_DATA, None)
+  }
+}
+
+pub struct RequestCommandArgs<'a> {
+    pub type_: RequestCommandType,
+    pub data: Option<flatbuffers::WIPOffset<Data<'a >>>,
+}
+impl<'a> Default for RequestCommandArgs<'a> {
+    #[inline]
+    fn default() -> Self {
+        RequestCommandArgs {
+            type_: RequestCommandType::SetViewportSize,
+            data: None,
+        }
+    }
+}
+pub struct RequestCommandBuilder<'a: 'b, 'b> {
+  fbb_: &'b mut flatbuffers::FlatBufferBuilder<'a>,
+  start_: flatbuffers::WIPOffset<flatbuffers::TableUnfinishedWIPOffset>,
+}
+impl<'a: 'b, 'b> RequestCommandBuilder<'a, 'b> {
+  #[inline]
+  pub fn add_type_(&mut self, type_: RequestCommandType) {
+    self.fbb_.push_slot::<RequestCommandType>(RequestCommand::VT_TYPE_, type_, RequestCommandType::SetViewportSize);
+  }
+  #[inline]
+  pub fn add_data(&mut self, data: flatbuffers::WIPOffset<Data<'b >>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<Data>>(RequestCommand::VT_DATA, data);
+  }
+  #[inline]
+  pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a>) -> RequestCommandBuilder<'a, 'b> {
+    let start = _fbb.start_table();
+    RequestCommandBuilder {
+      fbb_: _fbb,
+      start_: start,
+    }
+  }
+  #[inline]
+  pub fn finish(self) -> flatbuffers::WIPOffset<RequestCommand<'a>> {
     let o = self.fbb_.end_table(self.start_);
     flatbuffers::WIPOffset::new(o.value())
   }
@@ -575,7 +944,82 @@ impl<'a: 'b, 'b> ExecutionCommandsBuilder<'a, 'b> {
   }
 }
 
-}  // pub mod Commands
+pub enum RequestCommandsOffset {}
+#[derive(Copy, Clone, Debug, PartialEq)]
+
+pub struct RequestCommands<'a> {
+  pub _tab: flatbuffers::Table<'a>,
+}
+
+impl<'a> flatbuffers::Follow<'a> for RequestCommands<'a> {
+    type Inner = RequestCommands<'a>;
+    #[inline]
+    fn follow(buf: &'a [u8], loc: usize) -> Self::Inner {
+        Self {
+            _tab: flatbuffers::Table { buf: buf, loc: loc },
+        }
+    }
+}
+
+impl<'a> RequestCommands<'a> {
+    #[inline]
+    pub fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
+        RequestCommands {
+            _tab: table,
+        }
+    }
+    #[allow(unused_mut)]
+    pub fn create<'bldr: 'args, 'args: 'mut_bldr, 'mut_bldr>(
+        _fbb: &'mut_bldr mut flatbuffers::FlatBufferBuilder<'bldr>,
+        args: &'args RequestCommandsArgs<'args>) -> flatbuffers::WIPOffset<RequestCommands<'bldr>> {
+      let mut builder = RequestCommandsBuilder::new(_fbb);
+      if let Some(x) = args.commands { builder.add_commands(x); }
+      builder.finish()
+    }
+
+    pub const VT_COMMANDS: flatbuffers::VOffsetT = 4;
+
+  #[inline]
+  pub fn commands(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<RequestCommand<'a>>>> {
+    self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<flatbuffers::ForwardsUOffset<RequestCommand<'a>>>>>(RequestCommands::VT_COMMANDS, None)
+  }
+}
+
+pub struct RequestCommandsArgs<'a> {
+    pub commands: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a , flatbuffers::ForwardsUOffset<RequestCommand<'a >>>>>,
+}
+impl<'a> Default for RequestCommandsArgs<'a> {
+    #[inline]
+    fn default() -> Self {
+        RequestCommandsArgs {
+            commands: None,
+        }
+    }
+}
+pub struct RequestCommandsBuilder<'a: 'b, 'b> {
+  fbb_: &'b mut flatbuffers::FlatBufferBuilder<'a>,
+  start_: flatbuffers::WIPOffset<flatbuffers::TableUnfinishedWIPOffset>,
+}
+impl<'a: 'b, 'b> RequestCommandsBuilder<'a, 'b> {
+  #[inline]
+  pub fn add_commands(&mut self, commands: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<RequestCommand<'b >>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(RequestCommands::VT_COMMANDS, commands);
+  }
+  #[inline]
+  pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a>) -> RequestCommandsBuilder<'a, 'b> {
+    let start = _fbb.start_table();
+    RequestCommandsBuilder {
+      fbb_: _fbb,
+      start_: start,
+    }
+  }
+  #[inline]
+  pub fn finish(self) -> flatbuffers::WIPOffset<RequestCommands<'a>> {
+    let o = self.fbb_.end_table(self.start_);
+    flatbuffers::WIPOffset::new(o.value())
+  }
+}
+
 }  // pub mod Schemes
 }  // pub mod TechPaws
 

@@ -1,6 +1,4 @@
-include "data.fbs";
-
-namespace TechPaws.Schemes.Commands;
+namespace TechPaws.Schemes;
 
 enum RenderCommandType: byte {
     PushColor = 0,
@@ -27,14 +25,42 @@ enum RequestCommandType: byte {
     OnTouchMove = 3,
 }
 
+struct Vec2f {
+    x: float;
+    y: float;
+}
+
+struct Vec2i {
+    x: int;
+    y: int;
+}
+
+struct Color {
+    r: float;
+    g: float;
+    b: float;
+    a: float;
+}
+
+table Data {
+    color: Color;
+    vec2f: Vec2f;
+    vec2i: Vec2i;
+}
+
 table RenderCommand {
     type: RenderCommandType;
-    data: TechPaws.Schemes.Data.Variant;
+    data: Data;
 }
 
 table ExecutionCommand {
     type: ExecutionCommandType;
-    data: TechPaws.Schemes.Data.Variant;
+    data: Data;
+}
+
+table RequestCommand {
+    type: RequestCommandType;
+    data: Data;
 }
 
 table RenderCommands {
@@ -43,4 +69,8 @@ table RenderCommands {
 
 table ExecutionCommands {
     commands: [ExecutionCommand];
+}
+
+table RequestCommands {
+    commands: [RequestCommand];
 }
